@@ -1,7 +1,30 @@
+import re
 class Invoice:
 
     def __init__(self):
         self.items = {}
+
+    while True:
+        password_input = input("Please enter your password : ")
+        is_valid = False
+        if (len(password_input) < 5 or len(password_input) > 10):
+            print("Invaid Input ! Total characters should be between 5 and 10")
+            continue
+        elif not re.search("[a-z]", password_input):
+            print("Invaid Input ! Password must contain at least one lowercase letter")
+            continue
+        elif not re.search("[A-Z]", password_input):
+            print("Invaid Input ! Password must contain at least one uppercase letter")
+            continue
+        elif not re.search("[1-9]", password_input):
+            print("Invaid Input ! Password must contain at least a one number")
+            continue
+        elif not re.search("[~!@#$%^&*]", password_input):
+            print("Invaid Input ! Must contain a symbol")
+            continue
+        else:
+            is_valid = True
+            break
 
     def addProduct(self, qnt, price, discount):
         self.items['qnt'] = qnt
@@ -44,3 +67,11 @@ class Invoice:
                 continue
             else:
                 return userInput
+
+    def inputPayment(self, input_payment):
+        while True:
+            userInput = input(input_payment)
+            if userInput in ['Visa', 'visa', 'paypal', 'PayPal', 'Mastercard',
+                             'mastercard', 'ApplePay', 'applepay', 'other', 'Other']:
+                return userInput
+            print ("Invalid input, please enter your payment option ")
